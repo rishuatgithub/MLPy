@@ -1,5 +1,8 @@
 #Building to Model to predict fruits data with colors using SKlearn and KNN
 
+# Author: Rishu Shrivastava (rishu.shrivastava@gmail.com)
+# Date : June 4, 2017
+
 import numpy as np
 import matplotlib.pyplot as mp
 import pandas as pd
@@ -7,6 +10,7 @@ from sklearn.model_selection import train_test_split
 from matplotlib import cm
 from sklearn.neighbors import KNeighborsClassifier
 
+#reading data
 fruits = pd.read_table('C:/Users/Rishu/Documents/GitHub/MLPy/data/fruit_data_with_colors.txt')
 
 print("Displaying sample rows of Flower data set")
@@ -40,5 +44,3 @@ print("The ACCURACY score = ",knn.score(X_test,y_test))
 # first example: a small fruit with mass 20g, width 4.3 cm, height 5.5 cm
 fruit_prediction = knn.predict([[20, 4.3, 5.5]])
 print("PREDICTING fruit with mass 20g, width 4.3 cm, height 5.5 cm : ",lookup_fruit_name[fruit_prediction[0]])
-
-
