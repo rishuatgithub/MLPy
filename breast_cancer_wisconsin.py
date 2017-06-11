@@ -2,6 +2,7 @@
 
 # Author: Rishu Shrivastava (rishu.shrivastava@gmail.com)
 # Date : June 4, 2017
+# last updated : June 12, 2017
 
 import numpy as np
 import pandas as pd
@@ -40,9 +41,9 @@ def cancer_instances():
 	cancerdf = create_dataframe()
 	cancer_count = cancerdf['target'].value_counts()
 
-	#print("Malignant : Benign count = ", cancer_count[1],":", cancer_count[0])
+	#print("Malignant : Benign count = ", cancer_count[0],":", cancer_count[1])
 	
-	dict= {'malignant': cancer_count[1], 'benign':cancer_count[0]}
+	dict= {'malignant': cancer_count[0], 'benign':cancer_count[1]}
 	
 	s = pd.Series(dict, index=['malignant', 'benign'])
 	
@@ -53,16 +54,54 @@ def split_data():
 	# split the data into tuples X and y 
 	cancerdf = create_dataframe()
 	
-	X = cancerdf[1::30]
+	X = cancerdf.ix[:,:30]
 	y = cancerdf['target']
 	
 	return X, y
 
+from sklearn.model_selection import train_test_split
+def generate_test_train():
+	# generate test train data set using the data frame
+    X, y = split_data()
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+    return X_train, X_test, y_train, y_test
 
 	
+from sklearn.neighbors import KNeighborsClassifier
+def fit_knn_classifier():
+    X_train, X_test, y_train, y_test = generate_test_train()
+    
+    # for KNN neighbors = 1
+    knn = KNeighborsClassifier(n_neighbors = 1)
+    knn.fit(X_train, y_train)
+    return knn
+
+
+def accuracy_score():
+	# calculate prediction score
+    X_train, X_test, y_train, y_test = generate_test_train()
+    knn = fit_knn_classifier()
+    s = knn.score(X_test,y_test)
+    return s
+
+def calculate_mean_feature():
+    cancerdf = create_dataframe()
+    means = cancerdf.mean()[:-1].values.reshape(1, -1)
+    
+	knn = fit_knn_classifier()
+	  
+    pr = knn.predict(means)
+    
+    return pr
+
+
 print(print_keys())
 print(len_dataset())
 #print(create_dataframe())
 print(cancer_instances())
-
 #print(split_data())
+#print(generate_test_train())
+print(fit_knn_classifier())
+print(accuracy_score())
+
+print(calculate_mean_feature())
