@@ -3,28 +3,25 @@
 #author: Rishu Shrivastava
 #last updated: 12 June 2017
 
+# Help from: https://www.kaggle.com/omarelgabry/a-journey-through-titanic
+
 import numpy as np
 import matplotlib.pyplot as mp
 import pandas as pd
-from sklearn.model_selection import train_test_split
 
 titanic = pd.read_csv('C:/Users/Rishu/Documents/GitHub/MLPy/data/titanic/train.csv')
 titanic_test= pd.read_csv('C:/Users/Rishu/Documents/GitHub/MLPy/data/titanic/test.csv')
 
-#print("Data set type: ",type(titanic))
-#print("feature list: ", titanic.keys())
+#preview the dataframe
+print(titanic.head())
 
-X_train = titanic.ix[:,2:12]
-y_train = titanic['Survived']
+#get the info about the data
+print(titanic.info())
+print("--------------------------------------------")
+print(titanic_test.info())
 
 
-#print(X.shape)
+# Drop unnecessary columns that are not required for titanic dataset
+titanic = titanic.drop(['PassengerId','Name','Ticket','Embarked'], axis=1)
+titanic_test = titanic_test.drop(['Name','Ticket','Embarked'], axis=1)
 
-	
-from sklearn.neighbors import KNeighborsClassifier
-knn = KNeighborsClassifier(n_neighbors = 1)
-knn.fit(X_train, y_train)
-
-s = knn.score(X_test,y_test)
-
-print("Score :",s)
