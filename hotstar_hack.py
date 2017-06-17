@@ -7,7 +7,6 @@
 import numpy as np
 import pandas as pd
 import json
-from pandas.io.json import json_normalize
 
 #read JSON dataset
 
@@ -20,10 +19,9 @@ with open(hotstar_file_train) as hotstar_json_file:
 train = pd.DataFrame.from_dict(dict_train, orient='index')
 train.reset_index(level=0, inplace=True)
 train.rename(columns = {'index':'ID'},inplace=True)
+
 #print(train.shape)
 #print(train.head())
 print(train.info())
-
 # print(train.stack().unique())
-
 #train.to_csv('C:/Users/Rishu/Desktop/dATA/5f828822-4--4-hotstar_dataset/csv_train.csv', sep=',', encoding='utf-8')
