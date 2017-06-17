@@ -23,5 +23,11 @@ train.rename(columns = {'index':'ID'},inplace=True)
 #print(train.shape)
 #print(train.head())
 print(train.info())
+<<<<<<< HEAD
 # print(train.stack().unique())
+=======
+
+# print(train.stack().unique())
+
+>>>>>>> 0c17069c1dcc949b46cecc90e807dae1279727d4
 #train.to_csv('C:/Users/Rishu/Desktop/dATA/5f828822-4--4-hotstar_dataset/csv_train.csv', sep=',', encoding='utf-8')
