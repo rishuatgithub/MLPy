@@ -131,26 +131,32 @@ def pre_process_data(data):
     return data
 
 
+# >>> split the data set to create cross validation set
+from sklearn.model_selection import train_test_split
+X = pre_process_data(titanic.drop(['Survived'], axis=1))
+y = titanic["Survived"]
+X_train, y_train, X_crossval, y_crossval = train_test_split(X, y, random_state=0)
+
+print(X_crossval.info())
 # >>> Train Data set
 # generate the X and y values for the Train data set
-X_train = pre_process_data(titanic.drop(['Survived'], axis=1))
-y_train = titanic["Survived"]
+#X_train = pre_process_data(titanic.drop(['Survived'], axis=1))
+#y_train = titanic["Survived"]
 X_test  = pre_process_data(titanic_test.drop(["PassengerId"], axis=1))
 
 #def fit_knn_classifier():
-knn = KNeighborsClassifier(n_neighbors = 3)
-knn.fit(X_train, y_train)
-
-y_predict = knn.predict(X_test)
-
-accuracy_score_knn = knn.score(X_train, y_train)
-print("Accuracy score (KNN) :", accuracy_score_knn)
+for i in range(1,10):
+    knn = KNeighborsClassifier(n_neighbors = i)
+    knn.fit(X_train, y_train)
+    y_predict = knn.predict(X_test)
+    accuracy_score_knn = knn.score(X_crossval, y_crossval)
+    print("Accuracy score (KNN) :", accuracy_score_knn)
 
 
 #fit_knn_classifier()
-#def generate_csv():
-#    titanic.to_csv("C:/Users/Rishu/Documents/GitHub/MLPy/data/titanic/Sample.csv")
-#generate_csv()
+def generate_csv():
+    titanic.to_csv("C:/Users/Rishu/Documents/GitHub/MLPy/data/titanic/Sample.csv")
+generate_csv()
 
 def create_submission():
     submission = pd.DataFrame({
@@ -159,4 +165,4 @@ def create_submission():
             })
     submission.to_csv('C:/Users/Rishu/Documents/GitHub/MLPy/data/titanic/titanic_output.csv', index=False)
 
-#create_submission()
+create_submission()
