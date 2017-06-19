@@ -1,7 +1,7 @@
 # Training Titanic dataset from kaggle to predict Survival accuracy
 
 #author: Rishu Shrivastava
-#last updated: 18 June 2017
+#last updated: 20 June 2017
 
 # Help from: https://www.kaggle.com/omarelgabry/a-journey-through-titanic
 
@@ -135,34 +135,46 @@ def pre_process_data(data):
 from sklearn.model_selection import train_test_split
 X = pre_process_data(titanic.drop(['Survived'], axis=1))
 y = titanic["Survived"]
-X_train, y_train, X_crossval, y_crossval = train_test_split(X, y, random_state=0)
+X_train, X_crossval, y_train, y_crossval = train_test_split(X, y, random_state=0)
 
-print(X_crossval.info())
+#print(X_crossval)
 # >>> Train Data set
 # generate the X and y values for the Train data set
 #X_train = pre_process_data(titanic.drop(['Survived'], axis=1))
 #y_train = titanic["Survived"]
 X_test  = pre_process_data(titanic_test.drop(["PassengerId"], axis=1))
 
-#def fit_knn_classifier():
-for i in range(1,10):
-    knn = KNeighborsClassifier(n_neighbors = i)
-    knn.fit(X_train, y_train)
+def finding_best_KNN_score():
+    for i in range(1,10):
+        knn = KNeighborsClassifier(n_neighbors = i)
+        knn.fit(X_train, y_train)
+        y_predict = knn.predict(X_test)
+        accuracy_score_knn = knn.score(X_crossval, y_crossval)
+        print("Accuracy score (in perc) for neighbors:",i," : ", accuracy_score_knn*100)
+
+finding_best_KNN_score()
+
+def KNN_Predict_on_Test():
+    knn = KNeighborsClassifier(n_neighbors = 6)
+    knn.fit(X, y)
     y_predict = knn.predict(X_test)
-    accuracy_score_knn = knn.score(X_crossval, y_crossval)
-    print("Accuracy score (KNN) :", accuracy_score_knn)
+    return y_predict
 
 
-#fit_knn_classifier()
 def generate_csv():
     titanic.to_csv("C:/Users/Rishu/Documents/GitHub/MLPy/data/titanic/Sample.csv")
-generate_csv()
+#generate_csv()
 
 def create_submission():
     submission = pd.DataFrame({
             "PassengerId": titanic_test["PassengerId"],
-            "Survived": y_predict
+            "Survived": KNN_Predict_on_Test()
             })
     submission.to_csv('C:/Users/Rishu/Documents/GitHub/MLPy/data/titanic/titanic_output.csv', index=False)
 
 create_submission()
+
+
+
+#>>> CONCLUSION (https://www.kaggle.com/c/titanic/submissions?sortBy=date&group=all&page=1)
+# With KNN = 6; the test score was 0.65072 (best score).
