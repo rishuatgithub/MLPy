@@ -11,7 +11,7 @@ from matplotlib import cm
 from sklearn.neighbors import KNeighborsClassifier
 
 #reading data
-fruits = pd.read_table('C:/Users/Rishu/Documents/GitHub/MLPy/data/fruit_data_with_colors.txt')
+fruits = pd.read_table('./data/fruit_data_with_colors.txt')
 
 print("Displaying sample rows of Flower data set")
 print(fruits.head())

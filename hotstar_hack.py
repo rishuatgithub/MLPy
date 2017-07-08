@@ -11,7 +11,7 @@ import json
 #read JSON dataset
 
 # hotstar_train = pd.read_json('C:/Users/Rishu/Documents/GitHub/MLPy/data/hotstar/train_data.json')
-hotstar_file_train = 'C:/Users/Rishu/Desktop/dATA/5f828822-4--4-hotstar_dataset/train_data.json'
+hotstar_file_train = '~/Desktop/dATA/5f828822-4--4-hotstar_dataset/train_data.json'
 with open(hotstar_file_train) as hotstar_json_file:
     dict_train = json.load(hotstar_json_file)
 

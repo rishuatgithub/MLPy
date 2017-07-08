@@ -16,8 +16,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn import preprocessing
 
 # >>> read the data files
-titanic = pd.read_csv('C:/Users/Rishu/Documents/GitHub/MLPy/data/titanic/train.csv')
-titanic_test= pd.read_csv('C:/Users/Rishu/Documents/GitHub/MLPy/data/titanic/test.csv')
+titanic = pd.read_csv('./data/titanic/train.csv')
+titanic_test= pd.read_csv('./data/titanic/test.csv')
 
 # >>> preview the dataframe
 #print(titanic.head())
