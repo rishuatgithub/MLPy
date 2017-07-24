@@ -6,17 +6,23 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import seaborn as sns
+from matplotlib import cm as cm
 from sklearn import linear_model
 from sklearn.model_selection import train_test_split
 
 # import dataset
 flowering = pd.read_csv('../data/flowering_data/floweringtime_dataset.csv', sep=',')
 
-#print(flowering.head())
-
 flowering_df=flowering[['Year','Elevation','temparature','flowering_time']]
 
+# printing the flowering head sample
+print(">>> Printing the head of the dataframe")
 print(flowering_df.head())
+
+# finding out if the flowering time is null or not
+print(">>> If the flowering dataframe is null or not")
+print(flowering_df.isnull().sum())
 
 flowering_df['temparature'].dropna().astype(int);
 mean_temparature_train=flowering['temparature'].mean();
@@ -24,6 +30,15 @@ flowering_df['temparature'][np.isnan(flowering_df['temparature'])] = mean_tempar
 
 print(mean_temparature_train)
 print(flowering_df.head())
+
+def correlation_df(df):
+    c = df.corr()
+    sns.plt.title('Flowering time')
+    sns.heatmap(c)
+    plt.yticks(rotation=0)
+    sns.plt.show()
+
+correlation_df(flowering_df)
 
 #plotting a column map to vizualize the factor
 def visualize_data():
@@ -40,8 +55,10 @@ def visualize_data():
     ax3 = fig.add_subplot(313)
     ax3.set_title('Temperature vs Flowering time')
     ax3.plot(flowering_df['temparature'], flowering_df['temparature'], color='red')
+    plt.show()
 
-plt.show()
+visualize_data()
+
 
 # defining data and targets
 flowering_X = flowering_df[['Year']]
