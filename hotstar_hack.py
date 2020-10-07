@@ -23,7 +23,7 @@ train.rename(columns = {'index':'ID'},inplace=True)
 #print(train.shape)
 #print(train.head())
 print(train.info())
-<<<<<<< HEAD
+
 # print(train.stack().unique())
 
 # print(train.stack().unique())
