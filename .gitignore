@@ -6,3 +6,5 @@
 *.pickle
 *.pt
 *.csv
+
+torch/PYTORCH_NOTEBOOKS/Data
