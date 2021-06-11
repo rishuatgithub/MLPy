@@ -11,3 +11,4 @@ torch/PYTORCH_NOTEBOOKS/Data
 torch/runs
 data
 neptune.ai/sandbox/neptune-iris/.env
+*.dat
