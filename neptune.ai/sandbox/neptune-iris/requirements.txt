@@ -35,7 +35,7 @@ mistune==0.8.4
 monotonic==1.5
 msgpack==1.0.2
 nbclient==0.5.3
-nbconvert==6.0.7
+nbconvert==6.3.0
 nbformat==5.1.2
 neptune-client==0.4.132
 neptune-notebooks==0.0.19
