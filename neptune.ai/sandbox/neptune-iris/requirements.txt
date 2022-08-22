@@ -40,7 +40,7 @@ nbformat==5.1.2
 neptune-client==0.4.132
 neptune-notebooks==0.0.19
 nest-asyncio==1.5.1
-notebook==6.4.10
+notebook==6.4.12
 numpy==1.22.0
 oauthlib==3.1.0
 packaging==20.9
