@@ -14,3 +14,8 @@ neptune.ai/sandbox/neptune-iris/.env
 *.dat
 *.model
 ai-hackathon/hate-speech/model/hatespeech-finetuned-bert-20210724120229
+
+.env!/aws/.env
+.env
+
+.idea
